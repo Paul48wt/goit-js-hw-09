@@ -7,10 +7,13 @@ stopBtn.addEventListener('click', onBtnStopClick);
 
 function onBtnStartClick() {
   timerId = setInterval(setBgColor, 1000);
+  startBtn.removeEventListener('click', onBtnStartClick);
 }
 
 function onBtnStopClick() {
   clearInterval(timerId);
+  body.style.backgroundColor = '#ffffff';
+  startBtn.addEventListener('click', onBtnStartClick);
 }
 
 function setBgColor() {
