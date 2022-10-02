@@ -11,13 +11,13 @@ const secondsValue = document.querySelector('span[data-seconds]');
 let startTime = 0;
 let timerId = null;
 const INTERVAL = 1000;
+
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    // console.log(selectedDates[0].getTime());
     const date = new Date();
     if (date > selectedDates[0]) {
       Notiflix.Notify.failure('Please choose a date in the future');
@@ -26,9 +26,6 @@ const options = {
       startBtn.addEventListener('click', startCounter);
     }
     startTime = selectedDates[0].getTime() - date.getTime();
-    // updateClockFace(
-    //   convertMs(timerCounter(selectedDates[0].getTime() - date.getTime()))
-    // );
   },
 };
 
@@ -67,7 +64,7 @@ function updateClockFace({ days, hours, minutes, seconds }) {
 function timerCounter(ms) {
   let timer = ms;
   timerId = setInterval(() => {
-    timer = timer - INTERVAL;
+    timer -= INTERVAL;
     updateClockFace(convertMs(timer));
     if (timer <= 1000) {
       clearInterval(timerId);
